@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Campus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/55e7bc77af.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav>
+           
+            <div class="nav-links" id="navBox">
+                <i id="close-btn" onclick="hideMenu()" class="fa-regular fa-circle-xmark"></i>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="Map.html">Map</a></li>
+                    <li><a href="news.html">Tuorism News</a></li>
+                    <li><a href="contact-info.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i id="hamburger" onclick="showMenu()" class="fa-solid fa-bars"></i>
+        </nav>
+        <div class=" text-box">
+            <h1>Welcome to Sri Lanka</h1>
+            <p>
+                Sri Lanka, often referred to as the "Pearl of the Indian Ocean," 
+                is renowned for its rich cultural heritage, natural beauty, and diverse wildlife. 
+                Tourism plays a vital role in the country's economy, attracting millions of visitors annually. 
+                Travelers are drawn to its pristine beaches, ancient temples, lush rainforests, and vibrant cities.
+                 Popular destinations include historical sites like Sigiriya and Polonnaruwa,
+                  tea plantations in the central highlands, and wildlife reserves such as Yala National Park. 
+                  Sri Lanka's unique blend of cultural experiences, 
+                  adventure tourism, and wellness retreats makes it a top travel destination in South Asia.
+            </p>
+            <a href="about.html" class="hero-btn">Visit Us!</a>
+
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+    
+        <section class="section-body courses">
+            <header class="section-header">
+                <h1>We Offer</h1>
+                <p>At Smart Travel, we provide tailored travel itineraries, accommodation recommendations, and unique local tours to help you explore SriLanaka. We prioritize your safety by offering updated travel security information and practical tips. With exclusive deals and insider advice, we make sure your journey is enjoyable, convenient, and well-informed.</p>
+            </header>
+            <div class="row">
+                <div class="course-col">
+                    <h3>Finding locations</h3>
+                    <p>Discover the best places to visit with our comprehensive location guide. Whether you're looking for vibrant city life, serene beaches, or hidden natural gems, our easy-to-use location finder helps you explore the must-see destinations across [Destination/Country]. Each location is accompanied by detailed descriptions, travel tips, and must-know information, ensuring you choose the perfect spot for your next adventure.</p>
+                </div>
+                <div class="course-col">
+                    <h3>Give the prediction to safety</h3>
+                    <p>Your safety is our priority. With our Safety Predictions feature, we provide real-time insights and forecasts about the security and safety conditions of your chosen destinations. Using advanced data analysis, we predict potential risks such as weather conditions, local events, or any security-related concerns that may impact your travel plans. Stay informed and prepared with up-to-date safety information, so you can explore confidently and enjoy your trip without worry.
+
+                    </p>
+              
+            </div>
+        </section>
+
+        
+      
+        </section> -->
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Travel Finder</title>
+    <style>
+    
+    </style> 
+</head>
+<body>
+
+    <!-- Section: Travel Finder -->
+    <section class="section-body travel">
+        <header class="section-header">
+            <h1>Smart Travel Finder</h1>
+            <p>Search for travel destinations and explore details about your favorite locations.</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" id="location-input" placeholder="Enter a travel location...">
+            <button onclick="searchLocation()">Search</button>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="results-container">
+            <!-- Search results will appear here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 Travel Finder</p>
+    </footer>
+
+    <script>
+        function searchLocation() {
+            const location = document.getElementById('location-input').value;
+            const resultsContainer = document.getElementById('results-container');
+            resultsContainer.innerHTML = ''; // Clear previous results
+
+            if (location) {
+                // Replace 'YOUR_API_KEY' with your actual Google Places API key
+                fetch(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${location}&key=YOUR_API_KEY`)
+                .then(response => response.json())
+                .then(data => {
+                    const locations = data.results;
+                    locations.forEach(loc => {
+                        const resultItem = document.createElement('div');
+                        resultItem.classList.add('result-item');
+
+                        const photoRef = loc.photos && loc.photos.length > 0 ? 
+                            `https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${loc.photos[0].photo_reference}&key=YOUR_API_KEY` 
+                            : 'https://via.placeholder.com/400x200?text=No+Image';
+
+                        resultItem.innerHTML = `
+                            <img src="${photoRef}" alt="${loc.name}">
+                            <h4>${loc.name}</h4>
+                            <p>Address: ${loc.formatted_address}</p>
+                            <p>Rating: ${loc.rating || 'N/A'}</p>
+                        `;
+                        resultsContainer.appendChild(resultItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching location data:', error);
+                    resultsContainer.innerHTML = '<p>Error fetching location data. Please try again later.</p>';
+                });
+            } else {
+                resultsContainer.innerHTML = '<p>Please enter a location to search.</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+        
+    <!-- Image Gallery -->
+    <section class="section-body campus">
+    <header class="section-header">
+    <h1>Image Gallery</h1>
+    <p>Horizon Campus features a modern, well-designed campus with state-of-the-art facilities set against a serene backdrop. 
+            The campus blends academic spaces with green areas, creating an environment that is both inspiring and conducive to learning.</p>
+    </header>
+    <div class="row">
+        <div class="campus-col">
+            <img src="images/aa.jpg" alt="Image 01">
+            <div class="layer">
+                <h3>Image 01</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/ab.webp" alt="Image 02">
+            <div class="layer">
+                <h3>Image 02</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/abc.jpg" alt="Image 03">
+            <div class="layer">
+                <h3>Image 03</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="campus-col">
+            <img src="images/acbd.jpeg" alt="Image 04">
+            <div class="layer">
+                <h3>Image 04</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/aaa.jpg" alt="Image 05">
+            <div class="layer">
+                <h3>Image 05</h3>
+            </div>
+        </div>
+        <div class="campus-col">
+            <img src="images/asdf.webp" alt="Image 06">
+            <div class="layer">
+                <h3>Image 06</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
+   
+     <!-- Testimonials -->
+<section class="section-body testimonials">
+    <header class="section-header">
+        <h1>Users Review</h1>
+       
+    </header>
+
+    <!-- Feedback Submission Form -->
+    <div class="feedback-form">
+        <h2>Leave Your Feedback</h2>
+        <form id="feedbackForm">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <textarea id="feedback" placeholder="Your Feedback" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+   
+
+        <!-- Display Submitted Feedback -->
+        <div id="feedbackList" class="feedback-list">
+            <h2>What Others Are Saying</h2>
+            <!-- Example of dynamically added feedback -->
+            <!-- Feedback will be added here via JavaScript -->
+        </div>
+    </div>
+</section>
+
+<script>
+    // JavaScript to handle form submission and feedback display
+    const feedbackForm = document.getElementById('feedbackForm');
+    const feedbackList = document.getElementById('feedbackList');
+
+    feedbackForm.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const name = document.getElementById('name').value;
+        const feedback = document.getElementById('feedback').value;
+
+        // Create a new feedback element
+        const feedbackItem = document.createElement('div');
+        feedbackItem.className = 'feedback-item';
+        feedbackItem.innerHTML = `<h3>${name}</h3><p>${feedback}</p><i class="fa-solid fa-star"></i>
+                                  <i class="fa-solid fa-star"></i>
+                                  <i class="fa-solid fa-star"></i>
+                                  <i class="fa-solid fa-star"></i>
+                                  <i class="fa-solid fa-star-half-stroke"></i>`;
+
+        // Append the feedback to the list
+        feedbackList.appendChild(feedbackItem);
+
+        // Clear the form
+        feedbackForm.reset();
+    });
+    
+
+</script>
+
+
+    <!-- Footer -->
+    <footer>
+        
+        <section class="footer">
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Horizon Campus</h3>
+                    <p><a href="#">Home</a></p>
+                    <p><a href="about.html">About Us</a></p>
+                    <p><a href="Course.html">Courses</a></p>
+                    <p><a href="admission.html">Admissions</a></p>
+                    <p><a href="contact-info.html">Contact</a></p>
+                </div>
+                
+                </div>
+               
+            <div class="footer-bottom">
+                <div class="icons">
+                    <a href="https://www.facebook.com/HorizonCampusSL/" target="_blank" aria-label="Facebook">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="https://x.com/i/flow/login?redirect_after_login=%2Fhorizoncampus" target="_blank" aria-label="Twitter">
+                        <i class="fa-brands fa-twitter"></i>
+                    </a>
+                    <a href="https://www.instagram.com/horizon_campus/" target="_blank" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="https://lk.linkedin.com/school/horizon-campus/" target="_blank" aria-label="LinkedIn">
+                        <i class="fa-brands fa-linkedin"></i>
+                    </a>
+                </div>
+                <p>&copy; 2024 Horizon Campus</p>
+            </div>
+        </section>        
+    </footer>
+
+    <!-- JS to open and close the navbar menu -->
+    <script>
+        const navBox = document.getElementById('navBox');
+
+        const showMenu = () => {
+            navBox.style.right = '0';
+        }
+        const hideMenu = () => {
+            navBox.style.right = '-50%';
+        }
+    </script>
+</body>
+
+</html> 

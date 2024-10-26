@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Campus - Tourism News</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/55e7bc77af.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav>
+            <div class="nav-links" id="navBox">
+                <i id="close-btn" onclick="hideMenu()" class="fa-regular fa-circle-xmark"></i>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="Map.html">MAP</a></li>
+                    <li><a href="news.html">TOURISM NEWS</a></li>
+                    <li><a href="contact-info.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i id="hamburger" onclick="showMenu()" class="fa-solid fa-bars"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Tourism News</h1>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <!-- News Section -->
+        <div class="news-section">
+            <h2>Latest in Tourism</h2>
+            <div id="news-container" class="news-container"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Smart Travel</p>
+        <div class="icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://x.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const newsContainer = document.getElementById("news-container");
+
+            // Replace 'YOUR_API_KEY' with your actual API key
+            const apiKey = 'YOUR_API_KEY'; // <-- Add your API key here
+            const apiUrl = `https://newsapi.org/v2/top-headlines?country=lk&category=business&apiKey=${apiKey}`;
+
+            // Fetch news articles from the News API
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response was not ok');
+                    return response.json();
+                })
+                .then(data => {
+                    const articles = data.articles; // Get articles from response
+                    const renderNews = (articles) => {
+                        articles.forEach(article => {
+                            const newsDiv = document.createElement("div");
+                            newsDiv.classList.add("news-article");
+                            newsDiv.innerHTML = `
+                                <h2>${article.title}</h2>
+                                <p><strong>Date:</strong> ${new Date(article.publishedAt).toLocaleDateString()}</p>
+                                <p>${article.description}</p>
+                                <a href="${article.url}" target="_blank">Read more</a>
+                            `;
+                            newsContainer.appendChild(newsDiv);
+                        });
+                    };
+
+                    // Load the news articles
+                    renderNews(articles);
+                })
+                .catch(error => {
+                    console.error('Error fetching news:', error);
+                    newsContainer.innerHTML = "<p>Unable to load news articles.</p>";
+                });
+        });
+    </script>
+</body>
+
+</html>

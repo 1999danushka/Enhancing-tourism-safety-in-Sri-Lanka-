@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Campus</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/55e7bc77af.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="main-header">
+        <nav>
+            <div class="nav-links" id="navBox">
+                <i id="close-btn" onclick="hideMenu()" class="fa-regular fa-circle-xmark"></i>
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="about.html">ABOUT US</a></li>
+                    <li><a href="Map.html">MAP</a></li>
+                    <li><a href="news.html">TOURISM NEWS</a></li>
+                    <li><a href="contact-info.html">CONTACT</a></li>
+                </ul>
+            </div>
+            <i id="hamburger" onclick="showMenu()" class="fa-solid fa-bars"></i>
+        </nav>
+        <div class="text-box">
+            <h1>Search Location</h1>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main>
+        <!-- Search Bar -->
+        <div class="search-container">
+            <input type="text" id="location-input" placeholder="Enter location...">
+            <button id="search-button">Search</button>
+        </div>
+
+        <!-- Map Section -->
+        <div class="map-container" id="map"></div>
+
+        <!-- Location Details -->
+        <div class="location-details" id="location-details" style="display: none;">
+            <h2>Location Details</h2>
+            <p id="details"></p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Smart Travel</p>
+        <div class="icons">
+            <a href="https://www.facebook.com" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://x.com" target="_blank"><i class="fa-brands fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.linkedin.com" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize map
+        let map;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 7.8731, lng: 80.7718 }, // Center of Sri Lanka
+                zoom: 8,
+            });
+        }
+
+        // Handle search functionality
+        document.getElementById('search-button').addEventListener('click', () => {
+            const location = document.getElementById('location-input').value;
+            const geocoder = new google.maps.Geocoder();
+
+            geocoder.geocode({ address: location }, (results, status) => {
+                if (status === "OK") {
+                    map.setCenter(results[0].geometry.location);
+                    const marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                    });
+
+                    // Display location details
+                    document.getElementById('location-details').style.display = 'block';
+                    document.getElementById('details').innerText = `You searched for: ${location}`;
+                } else {
+                    alert("Location not found: " + status);
+                }
+            });
+        });
+    </script>
+
+    <!-- Google Maps API -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"></script>
+</body>
+
+</html>
